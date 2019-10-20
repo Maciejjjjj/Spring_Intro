@@ -34,11 +34,11 @@ public class RegistrationController {
     @PostMapping
     public String processRegistrationPage(String username, String password, String firstName, String lastName) {
 
-        String encdoedPassword = passwordEncoder.encode(password);
+        String encodedPassword = passwordEncoder.encode(password);
 
         User user = new User();
         user.setUsername(username);
-        user.setPassword(encdoedPassword);
+        user.setPassword(encodedPassword);
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setActive(true);
