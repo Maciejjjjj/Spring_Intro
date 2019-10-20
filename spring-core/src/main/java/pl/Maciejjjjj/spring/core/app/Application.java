@@ -15,7 +15,7 @@ public class Application {
 
         HelloWorld helloBean = context.getBean("helloBean", HelloWorld.class);
         helloBean.sayHello();
-        
+
 
         HelloWorld helloWorld = context.getBean("helloWorld", HelloWorld.class);
         helloWorld.sayHello();
