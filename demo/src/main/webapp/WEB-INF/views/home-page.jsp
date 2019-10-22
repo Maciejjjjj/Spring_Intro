@@ -20,22 +20,42 @@
 <body>
 <div class="container">
 
-    <div class="row" style="margin-top: 40px; margin-bottom: 10px">
-        <div class="col-1"></div>
-        <div class="col-6"><h2>Dodaj ogłoszenie</h2></div>
-        <div class="col-5"></div>
-    </div>
-
-    <div class="row">
-        <div class="col-2"></div>
-        <div class="col-8">
-
-            <%-- Tutaj formularz dodawania nowego ogłoszenia (PÓŹNIEJ) --%>
-
+    <sec:authorize access="isAuthenticated()">
+        <div class="row" style="margin-top: 40px; margin-bottom: 10px">
+            <div class="col-1"></div>
+            <div class="col-6"><h2>Dodaj ogłoszenie</h2></div>
+            <div class="col-5"></div>
         </div>
-        <div class="col-2"></div>
-    </div>
 
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+
+
+                <form method="post" action="/add-advert">
+
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" required name="title" placeholder="Podaj tytuł ogłoszenia"
+                               class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea required name="description" placeholder="Uzupełnij opis ogłoszenia"
+                                  class="form-control"></textarea>
+                    </div>
+
+                    <fieldset>
+                        <input type="submit" value="Dodaj"/> <input type="reset" value="Wyczyść"/>
+                    </fieldset>
+                    <sec:csrfInput/>
+                </form>
+
+
+            </div>
+            <div class="col-2"></div>
+        </div>
+    </sec:authorize>
     <div class="row" style="margin-top: 40px; margin-bottom: 10px">
         <div class="col-1"></div>
         <div class="col-6"><h2>Lista ogłoszeń</h2></div>
@@ -54,16 +74,16 @@
                 </tr>
 
                 <c:forEach items="${adverts}" var="advert" varStatus="stat">
-                <tr>
-                    <td>${stat.count}</td>
-                    <td><b>${advert.title}</b></td>
-                    <td>${advert.description}</td>
-                    <td>${advert.owner.username}</td>
-                    <td>${advert.posted}</td>
+                    <tr>
+                        <td>${stat.count}</td>
+                        <td><b>${advert.title}</b></td>
+                        <td>${advert.description}</td>
+                        <td>${advert.owner.username}</td>
+                        <td>${advert.posted}</td>
 
-                </tr>
+                    </tr>
                 </c:forEach>
-
+            </table>
         </div>
     </div>
 
