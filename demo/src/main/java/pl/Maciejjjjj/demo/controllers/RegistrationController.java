@@ -45,7 +45,7 @@ public class RegistrationController {
 
         userRepository.save(user);
 
-        return "redirect:/index.html";
+        return "redirect:/";
     }
 }
 
