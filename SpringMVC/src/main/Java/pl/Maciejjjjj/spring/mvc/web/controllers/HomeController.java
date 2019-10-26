@@ -18,7 +18,7 @@ public class HomeController {
     @GetMapping("/helloJSP")
     public String sayHelloJSP() {
 
-        return "/WEB-INF/views/hello.jsp";
+        return "hello";
     }
 
 
