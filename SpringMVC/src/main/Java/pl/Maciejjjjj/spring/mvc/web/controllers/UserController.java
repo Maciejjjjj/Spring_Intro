@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.Maciejjjjj.spring.doamin.User;
+import pl.Maciejjjjj.spring.doamin.UserDTO;
+import pl.Maciejjjjj.spring.mvc.core.services.UserService;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,20 +16,21 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/users")
 public class UserController {
 
-    public Long counter = 0L;
 
+    private Long counter = 0L;
+
+    private UserService userService = new UserService();
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("/{id:[0-9]+}")
     public String showUser(Model model, @PathVariable Long id) {
 
-        User user = new User();
-        user.setId(id);
-        user.setFirstName("Andrzej");
-        user.setLastName("Andrzejewicz");
-        user.setAge(108);
-        user.setGender("Female");
+        UserDTO user = userService.getUser(id);
 
-        
+
         model.addAttribute("user", user);
 
         return "user";
@@ -40,18 +43,21 @@ public class UserController {
     }
 
     @PostMapping("/add")
-    public String createUser(String firstName, String lastName, Integer age, String gender, Model model) {
+    public String createUser(UserDTO user, Model model) {
 
         //Long id = nextIdFromSession(session);
 
-        counter++;
+        //counter++;
 
-        User user = new User();
-        user.setId(counter);
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setAge(age);
-        user.setGender(gender);
+//        User user = new User();
+//        user.setId(counter);
+//        user.setFirstName(firstName);
+//        user.setLastName(lastName);
+//        user.setAge(age);
+//        user.setGender(gender);
+
+        Long id = userService.saveUser(user);
+        user.setId(id);
 
         model.addAttribute("user", user);
 

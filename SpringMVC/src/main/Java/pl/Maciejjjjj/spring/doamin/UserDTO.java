@@ -3,16 +3,26 @@ package pl.Maciejjjjj.spring.doamin;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class User {
+public class UserDTO {
 
     private Long id;
     private String firstName;
     private String lastName;
     private Integer age;
     private String gender;
-    private LocalDateTime creationDate;
-    private LocalDateTime lastModificationDate;
     private Long versionId;
+
+    public UserDTO() {
+    }
+
+    public UserDTO(Long id, String firstName, String lastName, Integer age, String gender, Long versionId) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.gender = gender;
+        this.versionId = versionId;
+    }
 
     public Long getId() {
         return id;
@@ -54,22 +64,6 @@ public class User {
         this.gender = gender;
     }
 
-    public LocalDateTime getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(LocalDateTime creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public LocalDateTime getLastModificationDate() {
-        return lastModificationDate;
-    }
-
-    public void setLastModificationDate(LocalDateTime lastModificationDate) {
-        this.lastModificationDate = lastModificationDate;
-    }
-
     public Long getVersionId() {
         return versionId;
     }
@@ -82,7 +76,7 @@ public class User {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
+        UserDTO user = (UserDTO) o;
         return Objects.equals(id, user.id);
     }
 
@@ -100,8 +94,6 @@ public class User {
                 ", lastName='" + lastName + '\'' +
                 ", age=" + age +
                 ", gender='" + gender + '\'' +
-                ", creationDate=" + creationDate +
-                ", lastModificationDate=" + lastModificationDate +
                 ", versionId=" + versionId +
                 '}';
     }
